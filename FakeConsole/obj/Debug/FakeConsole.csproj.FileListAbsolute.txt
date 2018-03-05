@@ -1,0 +1,14 @@
+c:\users\cj\documents\visual studio 2015\Projects\FakeConsole\FakeConsole\bin\Debug\FakeConsole.exe.config
+c:\users\cj\documents\visual studio 2015\Projects\FakeConsole\FakeConsole\bin\Debug\FakeConsole.exe
+c:\users\cj\documents\visual studio 2015\Projects\FakeConsole\FakeConsole\bin\Debug\FakeConsole.pdb
+c:\users\cj\documents\visual studio 2015\Projects\FakeConsole\FakeConsole\obj\Debug\FakeConsole.csprojResolveAssemblyReference.cache
+c:\users\cj\documents\visual studio 2015\Projects\FakeConsole\FakeConsole\obj\Debug\FakeConsole.Form1.resources
+c:\users\cj\documents\visual studio 2015\Projects\FakeConsole\FakeConsole\obj\Debug\FakeConsole.Properties.Resources.resources
+c:\users\cj\documents\visual studio 2015\Projects\FakeConsole\FakeConsole\obj\Debug\FakeConsole.csproj.GenerateResource.Cache
+c:\users\cj\documents\visual studio 2015\Projects\FakeConsole\FakeConsole\obj\Debug\FakeConsole.exe
+c:\users\cj\documents\visual studio 2015\Projects\FakeConsole\FakeConsole\obj\Debug\FakeConsole.pdb
+C:\Users\CJ\documents\visual studio 2015\Projects\FakeConsole\FakeConsole\bin\Debug\Tools.dll
+C:\Users\CJ\documents\visual studio 2015\Projects\FakeConsole\FakeConsole\bin\Debug\Tools.pdb
+C:\Users\CJ\Documents\Visual Studio 2015\Projects\FakeConsole\AsciiGame\FakeConsole\bin\Debug\FakeConsole.exe.config
+C:\Users\CJ\Documents\Visual Studio 2015\Projects\FakeConsole\AsciiGame\FakeConsole\obj\Debug\FakeConsole.exe
+C:\Users\CJ\Documents\Visual Studio 2015\Projects\FakeConsole\AsciiGame\FakeConsole\obj\Debug\FakeConsole.pdb

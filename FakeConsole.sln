@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeConsole", "FakeConsole\FakeConsole.csproj", "{EC9557F6-C69C-4616-A6D5-7286EFDDAB6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tools", "Tools\Tools.csproj", "{2C124058-1453-48E5-846C-312C55F93384}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC9557F6-C69C-4616-A6D5-7286EFDDAB6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC9557F6-C69C-4616-A6D5-7286EFDDAB6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC9557F6-C69C-4616-A6D5-7286EFDDAB6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC9557F6-C69C-4616-A6D5-7286EFDDAB6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C124058-1453-48E5-846C-312C55F93384}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C124058-1453-48E5-846C-312C55F93384}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C124058-1453-48E5-846C-312C55F93384}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C124058-1453-48E5-846C-312C55F93384}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

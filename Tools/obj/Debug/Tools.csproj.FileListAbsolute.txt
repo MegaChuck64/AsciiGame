@@ -1,0 +1,5 @@
+C:\Users\CJ\documents\visual studio 2015\Projects\FakeConsole\Tools\bin\Debug\Tools.dll
+C:\Users\CJ\documents\visual studio 2015\Projects\FakeConsole\Tools\bin\Debug\Tools.pdb
+C:\Users\CJ\documents\visual studio 2015\Projects\FakeConsole\Tools\obj\Debug\Tools.csprojResolveAssemblyReference.cache
+C:\Users\CJ\documents\visual studio 2015\Projects\FakeConsole\Tools\obj\Debug\Tools.dll
+C:\Users\CJ\documents\visual studio 2015\Projects\FakeConsole\Tools\obj\Debug\Tools.pdb
