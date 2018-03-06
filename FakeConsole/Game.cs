@@ -6,6 +6,20 @@ using static Tools.Structures;
 using System.Collections.Generic;
 
 
+
+/// <summary>
+/// ::::::::::::::::::::::::::TODO:::::::::::::::::::::::::::::::
+/// 
+///        IDK man, this shit is too slow
+///        consider going back to a real console
+///        using the c++ calls to set window and font
+///        and the user32.dll import
+///        or maybe even c++ and curses lol
+/// 
+/// ::::::::::::::::::::::::::TODO:::::::::::::::::::::::::::::::
+/// </summary>
+
+
 namespace FakeConsole
 {
     class Game
@@ -26,7 +40,8 @@ namespace FakeConsole
 
         #region Instances
         Ascii_Rectangle[] border;
-        Ascii_Rectangle player;
+        AsciiShape player;
+
 
         #endregion
 
@@ -38,19 +53,23 @@ namespace FakeConsole
             switch (k.KeyCode)
             {
                 case Keys.W:
-                    player.Move(0, -5);
+                    player.Move(0,  -5);
+
                     break;
                 case Keys.A:
-                    player.Move(-5, 0);
+                    player.Move( -5,  0);
+
 
                     break;
                 case Keys.S:
-                    player.Move(0, 5);
+                    player.Move(0,  5);
+
 
                     break;
                 case Keys.D:
-                    player.Move(5, 0);
-                    break;
+                    player.Move( 5, 0);
+
+                    break;       
 
                 default:
                     break;
@@ -63,17 +82,26 @@ namespace FakeConsole
             {
                 case Keys.W:
                     player.isMoving = false;
+
                     break;
                 case Keys.A:
                     player.isMoving = false;
+
                     break;
                 case Keys.S:
                     player.isMoving = false;
+
                     break;
                 case Keys.D:
                     player.isMoving = false;
+
                     break;
 
+                case Keys.Space:
+
+                    moveDir = new Point(rand.Next(-10, 10), rand.Next(-10, 10));
+                    
+                    break;
                 default:
                     break;
             }
@@ -108,18 +136,22 @@ namespace FakeConsole
 
             border = new Ascii_Rectangle[4];
 
+            //left
             border[0] = new Ascii_Rectangle('o', new Point(55, 1), true, new Point(26, 20), font, Brushes.Crimson);
+            
+            //top
             border[1] = new Ascii_Rectangle('o', new Point(1, 44), true, new Point(26, 20), font, Brushes.Crimson);
+            
+            //rihgt
             border[2] = new Ascii_Rectangle('o', new Point(1, 44), true, new Point(890, 20), font, Brushes.Crimson);
-            border[3] = new Ascii_Rectangle('o', new Point(55, 1), true, new Point(26, 840), font, Brushes.Crimson);
 
-            foreach (Ascii_Rectangle b in border)
-            {
-                b.Draw(form.CreateGraphics());
-            }
+            //bottom
+            border[3] = new Ascii_Rectangle('o', new Point(55, 1), true, new Point(26, 837), font, Brushes.Crimson);
 
-            player = new Ascii_Rectangle('=', new Point(2, 2), true, new Point(100, 100), font, Brushes.Orange);
 
+            player = new AsciiShape(new Point(100, 100), font, Brushes.Orange);
+
+            moveDir = new Point(rand.Next(-10, 10), rand.Next(-10, 10));
         }
 
         #endregion
@@ -129,18 +161,59 @@ namespace FakeConsole
 
 
         #region Updating Functions
+        Point moveDir;
 
         public void Update(int secondsElapsed)
         {
             seconds = secondsElapsed;
 
 
+
+            if (player.location.X < border[0].location.X + font.Size || player.location.X >= border[2].location.X - (5*font.Size))
+            {
+                if (moveDir.X > 0)
+                {
+                    moveDir.X = rand.Next(1, 10);
+                    player.location.X -= 4;
+                }
+                else
+                {
+                    moveDir.X = rand.Next(-10, 0);
+                    player.location.X += 4;
+                }
+
+                moveDir.X *= -1;
+            }
+            if (player.location.Y < border[1].location.Y + font.Height || player.location.Y >= border[3].location.Y - (5*font.Size))
+            {
+                if (moveDir.Y > 0)
+                {
+                    moveDir.Y = rand.Next(1, 10);
+                    player.location.Y -= 4;
+                }
+                else
+                {
+                    moveDir.Y = rand.Next(-10, 0);
+                    player.location.Y += 4;
+                }
+
+                moveDir.Y *= -1;
+            }
+
+                player.Move(moveDir.X, moveDir.Y);
+
+            player.Play();
+
         }
 
         public void Draw(Graphics g)
         {
-
+            foreach (Ascii_Rectangle b in border)
+            {
+                b.Draw(g);
+            }
             player.Draw(g);
+
         }
 
         #endregion
