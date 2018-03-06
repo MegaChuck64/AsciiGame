@@ -21,7 +21,7 @@ namespace FakeConsole
         {
             game = new Game(this, this.Font, (Point)this.Size);
 
-            UpdateTimer.Interval = 1000 / 16;
+            UpdateTimer.Interval = 1000 / 30;
 
             UpdateTimer.Enabled = true;
             SecondTimer.Enabled = true;
@@ -46,42 +46,9 @@ namespace FakeConsole
 
             ///Combinations
 
-            if (Keyboard.IsKeyDown(Key.W) && Keyboard.IsKeyDown(Key.D))
+            if (Keyboard.IsKeyDown(Key.Escape))
             {
-
-            }
-
-            if (Keyboard.IsKeyDown(Key.W) && Keyboard.IsKeyDown(Key.A))
-            {
-
-            }
-
-            if (Keyboard.IsKeyDown(Key.S) && Keyboard.IsKeyDown(Key.D))
-            {
-
-            }
-
-            if (Keyboard.IsKeyDown(Key.S) && Keyboard.IsKeyDown(Key.A))
-            {
-
-            }
-
-
-            ///Single key presses
-            switch (e.KeyCode)
-            {
-                case Keys.W:
-                    break;
-                case Keys.A:
-                    break;
-                case Keys.S:
-                    break;
-                case Keys.D:
-                    break;
-                case Keys.Enter:
-                    break;
-                default:
-                    break;
+               Application.Exit();
             }
 
             game.KeyDown(e);
@@ -90,7 +57,7 @@ namespace FakeConsole
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-             game.Draw(e);
+             game.Draw(e.Graphics);
 
            // e.Graphics.DrawString("Font Width: " + this.Font.Size + "--- Font Height: " + this.Font.Height, this.Font, Brushes.Red, new Point(200, 200));
         }

@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using static Tools.Helper;
 using static Tools.Structures;
+using System.Collections.Generic;
 
 
 namespace FakeConsole
@@ -10,59 +11,45 @@ namespace FakeConsole
     class Game
     {
 
-        Form form;
+
+        Form form;          //refrence to the main form
+
+        Font font;          //generic font to draw all text with
+
+        int seconds;        //seconds elapsed so far
+
+        Point screenSize;   // in pixels
+
+        Random rand;        //our random number generator   
 
 
-        Font font;
 
-        int seconds;
+        #region Instances
+        Ascii_Rectangle[] border;
+        Ascii_Rectangle player;
 
-        Point screenSize;
-
-        Random rand;
-
-
-        public Game(Form frm, Font fnt, Point size)
-        {
-            form = frm;
-            font = fnt;
-            screenSize = size;
-            Start();
-
-        }
+        #endregion
 
 
-        bool isMoving;
+        #region Input
 
         public void KeyDown(KeyEventArgs k)
         {
             switch (k.KeyCode)
             {
                 case Keys.W:
-                    walk0.location.Y -= 5;
-                    walk1.location.Y -= 5;
-                    idle.location.Y -= 5;
-                    isMoving = true;
+                    player.Move(0, -5);
                     break;
                 case Keys.A:
-                    walk0.location.X -= 5;
-                    walk1.location.X -= 5;
-                    idle.location.X -= 5;
-                    isMoving = true;
+                    player.Move(-5, 0);
 
                     break;
                 case Keys.S:
-                    walk0.location.Y += 5;
-                    walk1.location.Y += 5;
-                    idle.location.Y += 5;
-                    isMoving = true;
+                    player.Move(0, 5);
 
                     break;
                 case Keys.D:
-                    walk0.location.X += 5;
-                    walk1.location.X += 5;
-                    idle.location.X += 5;
-                    isMoving = true;
+                    player.Move(5, 0);
                     break;
 
                 default:
@@ -75,119 +62,87 @@ namespace FakeConsole
             switch (k.KeyCode)
             {
                 case Keys.W:
-                    isMoving = false;
+                    player.isMoving = false;
                     break;
                 case Keys.A:
-
-                    isMoving = false;
-
+                    player.isMoving = false;
                     break;
                 case Keys.S:
-
-                    isMoving = false;
-
+                    player.isMoving = false;
                     break;
                 case Keys.D:
-
-                    isMoving = false;
+                    player.isMoving = false;
                     break;
 
                 default:
                     break;
             }
         }
-        AsciiShape idle;
-        AsciiShape walk0;
-        AsciiShape walk1;
 
-        void CreatePlayer()
+
+        #endregion
+
+
+
+
+        #region Initialization Functions
+        /// <summary>
+        /// Game Constructor is essentially the equivelent of the Unity Awake function
+        /// </summary>
+        public Game(Form frm, Font fnt, Point size)
         {
+            form = frm;
+            font = fnt;
+            screenSize = size;
+            Start();
 
         }
 
-
+        /// <summary>
+        /// Consider making game static, and only having one of these functions instead of both start and constuctor
+        /// </summary>
         private void Start()
         {
             rand = new Random();
-            char[,] gridIdle =
+
+
+            border = new Ascii_Rectangle[4];
+
+            border[0] = new Ascii_Rectangle('o', new Point(55, 1), true, new Point(26, 20), font, Brushes.Crimson);
+            border[1] = new Ascii_Rectangle('o', new Point(1, 44), true, new Point(26, 20), font, Brushes.Crimson);
+            border[2] = new Ascii_Rectangle('o', new Point(1, 44), true, new Point(890, 20), font, Brushes.Crimson);
+            border[3] = new Ascii_Rectangle('o', new Point(55, 1), true, new Point(26, 840), font, Brushes.Crimson);
+
+            foreach (Ascii_Rectangle b in border)
             {
-                {' ',' ','0','0','0',' ',' '},
-                {' ',' ','0',' ','0',' ',' '},
-                {' ',' ','0','0','0',' ',' '},
-                {' ',' ',' ','0',' ',' ',' '},
-                {' ','0','0','0','0','0',' '},
-                {' ',' ',' ','0',' ',' ',' '},
-                {' ',' ','0',' ','0',' ',' '},
-                {' ',' ','0',' ','0',' ',' '},
-            };
+                b.Draw(form.CreateGraphics());
+            }
 
-            char[,] gridWalk0 =
-{
-                {' ',' ','0','0','0',' ',' '},
-                {' ',' ','0',' ','0',' ',' '},
-                {' ',' ','0','0','0',' ',' '},
-                {' ',' ',' ','0',' ',' ',' '},
-                {' ','0','0','0','0',' ',' '},
-                {' ',' ',' ','0',' ','0',' '},
-                {' ',' ','0',' ','0',' ',' '},
-                {' ',' ',' ',' ','0',' ',' '},
-            };
+            player = new Ascii_Rectangle('=', new Point(2, 2), true, new Point(100, 100), font, Brushes.Orange);
 
-
-
-            char[,] gridWalk1 =
-            {
-                {' ',' ','0','0','0',' ',' '},
-                {' ',' ','0',' ','0',' ',' '},
-                {' ',' ','0','0','0',' ',' '},
-                {' ',' ',' ','0',' ',' ',' '},
-                {' ',' ','0','0','0','0',' '},
-                {' ','0',' ','0',' ',' ',' '},
-                {' ',' ','0',' ','0',' ',' '},
-                {' ',' ','0',' ',' ',' ',' '},
-            };
-
-            idle = new AsciiShape(gridIdle, new Point(20, 20), font, Brushes.CornflowerBlue);
-            idle.RotateFix();
-
-            walk0 = new AsciiShape(gridWalk0, new Point(20, 20), font, Brushes.CornflowerBlue);
-            walk0.RotateFix();
-
-            walk1 = new AsciiShape(gridWalk1, new Point(20, 20), font, Brushes.CornflowerBlue);
-            walk1.RotateFix();
         }
 
-        int currentFrame = 0;
+        #endregion
+
+
+
+
+
+        #region Updating Functions
 
         public void Update(int secondsElapsed)
         {
             seconds = secondsElapsed;
 
 
-
-            if (currentFrame < 8)
-            {
-                currentFrame++;
-            }
-            else
-            {
-                currentFrame = 0;
-            }
         }
 
-        public void Draw(PaintEventArgs g)
+        public void Draw(Graphics g)
         {
-            if (isMoving)
-            {
-                if (currentFrame < 4)
-                    walk0.Draw(g);
-                else
-                    walk1.Draw(g);
-            }
-            else
-            {
-                idle.Draw(g);
-            }
+
+            player.Draw(g);
         }
+
+        #endregion
     }
 }
